@@ -12,6 +12,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  
     <!-- Local Style -->
     <link rel="stylesheet" href="./styles/style.css">
 
@@ -21,9 +22,57 @@
 <body>
     <div>
         <!-- Title -->
-        <header></header>
+        <header class="jumbotron jumbotron-fluid bg-white">    
+            <h1 class="display-4 bg-white text-dark"><i class="bi bi-film"></i>
+                Cinema information
+            </h1>
+        </header>
         <!-- Search -->
-        <nav></nav>
+        <nav>
+            <form>
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                      <br>
+                    <button type="submit" class="btn btn-primary">Search for movie</button>
+                  </div>
+                  <div class="col-lg">
+                    <label for="movie_title" class="font-weight-bold">Movie Title</label>
+                    <input type="text" class="form-control" id="movie_title" aria-describedby="emailHelp" placeholder="Enter Name of Movie">
+                    <small>Please enter name of movie example: star wars.</small>
+                  </div>
+                  <div class="col-lg">
+                    <label for="exampleInputEmail1">Year of Release (optional)</label>
+                    <input type="number" class="form-control" id="year_release" aria-describedby="emailHelp" placeholder="(optional) Year of Release">
+                    <small>Please enter year of release example: 1994. This will help us pick correct movie for you</small>
+                  </div>
+                </div>
+              </div>
+            </form>
+                <div class="container">
+                    <form>
+                    <div class="row">
+                        <br>
+                      <div class="col-sm">
+                        <button type="submit" class="btn btn-primary">Pick for me</button> 
+                      </div>
+                      <div class="col-sm">
+                        <label for="pick_genre">Please pick a Genre you would like to watch</label>
+                        <select class="form-control" id="pick_genre">
+                            <option>Please pick genre...</option>
+                          <option>Sci-fi</option>
+                          <option>Comedy</option>
+                          <option>Drama</option>
+                          <option>Romance</option>
+                          <option>Horror</option>
+                        </select>
+                      </div>
+                      <div class="col-sm"></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+        </nav>
         <!-- Carrousel -->
         <section></section>
         <!-- Graphs -->
@@ -43,9 +92,7 @@
     <!-- Local Script -->
     <script src="./scripts/script.js"></script>
     <!-- BootStrap Script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 </html>
