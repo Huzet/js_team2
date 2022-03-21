@@ -2,3 +2,21 @@ body {
     background-color: teal;
 
 }
+
+header {
+    height: 10rem;
+    padding-left: 10rem;
+    background-color: orange;
+}
+
+header h1 {
+    padding-top: 2rem;
+}
+
+nav label {
+    font-weight: bold;
+}
+
+nav {
+    background-color: antiquewhite;
+}
