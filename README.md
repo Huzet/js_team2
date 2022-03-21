@@ -1,8 +1,8 @@
-Cinema information (Shi-Tian) Votes: M T S
-Description (User Story):
+# Cinema information (Shi-Tian) Votes: M T S
+- Description (User Story):
 
-Movie Info
-Movie Poster
+- Movie Info
+  - Movie Poster
 Main Actors
 Genre
 Description
