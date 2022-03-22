@@ -1,6 +1,8 @@
 // variables 
 import { secret_key } from "./modules/api_keys.js"
+import { secret_key_imdb } from "./modules/api_keys.js"
 const movieData = [];
+
 let myCookie;
 
 // chart for rating
@@ -94,7 +96,7 @@ function getMovieData({movie_title_input, movie_release_year}) {
     })
     .then(function(data){
         movieCardData(data);
-        createMovieCard(data);
+        createMovieCard();
     })
 
 }
@@ -120,6 +122,7 @@ function justPrint(){
     console.log(movieData[index].Released)
 
     console.log(movieData)
+    getMovieTrailer()
 }
 
 // Will delete once we place cookie. Cookie will be placed to see if user has voted
@@ -241,5 +244,24 @@ function searchRandomName(evt) {
             movie_title_input: data.name,
             movie_release_year: ""
         })
+    })
+}
+
+function getMovieTrailer() {
+
+    // Get movie ID
+    let index = (movieData.length - 1);
+    let imdb_id = movieData[index].imdbID
+
+    // use that ID to search for youTube trailer
+    let api_moviedb_api_url = `https://api.themoviedb.org/3/movie/${imdb_id}/videos?api_key=${secret_key_imdb}&language=en-US`
+    fetch(api_moviedb_api_url)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data1){
+        console.log(`https://www.youtube.com/watch?v=${data1.results[0].key}`);
+        movieData[index]["trailer_link"] = `https://www.youtube.com/watch?v=${data1.results[0].key}`;
+        console.log( movieData[index].trailer_link);
     })
 }
