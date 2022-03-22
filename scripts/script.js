@@ -3,15 +3,19 @@ import { secret_key } from "./modules/api_keys.js"
 const movieData = [];
 let myCookie;
 
-const ctx = document.getElementById('myCanvas').getContext('2d');
-const myChart = new Chart(ctx, {
+// chart for rating
+const ctxRating = document.getElementById('movieRating').getContext('2d');
+const chartRating = new Chart(ctxRating, {
     type: 'bar',
     data: {
+        // get movie name
         labels: ['Movie1', 'Movie2', 'Movie3'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3],
+            label: 'Movie Rating',
+            // get movie rating
+            data: [6.6, 8.6, 5.3],
             backgroundColor: [
+                // function to set colors depands on how many movies
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
@@ -33,8 +37,28 @@ const myChart = new Chart(ctx, {
     }
 });
 
-// Search Bar 
+// chart for vote
+const ctxVote = document.getElementById('movieVote').getContext('2d');
+const chartVote = new Chart(ctxVote, {
+    type: 'doughnut',
+    data: {
+        // get moive name
+        labels: ['Movie1', 'Movie2', 'Movie3'],
+        datasets: [{
+            label: 'Votes',
+            // get votes
+            data: [5, 9, 3],
+            backgroundColor: [
+            // function to set how many colors depands on how many movies
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+            ],
+            hoverOffset: 4
+        }]
+}});
 
+// Search Bar 
 
 // Button Listener
 document.getElementById("searchMovieForm").addEventListener("submit", searchMovieButtonPress);
@@ -210,5 +234,4 @@ function searchRandomName(evt) {
             movie_release_year: ""
         })
     })
-
 }
