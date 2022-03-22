@@ -1,3 +1,8 @@
+// variables 
+import { secret_key } from "./modules/api_keys.js"
+let movieData = [];
+let myCookie;
+
 const ctx = document.getElementById('myCanvas').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
@@ -29,8 +34,7 @@ const myChart = new Chart(ctx, {
 });
 
 // Search Bar 
-import { secret_key } from "./modules/api_keys.js"
-let movieData = [];
+
 
 // Button Listener
 document.getElementById("searchMovieForm").addEventListener("submit", searchMovieButtonPress);
@@ -88,3 +92,38 @@ function justPrint(){
     console.log(movieData[index].Actors)
     console.log(movieData[index].Released)
 }
+
+// Will delete once we place cookie. Cookie will be placed to see if user has voted
+document.getElementById("cookie").addEventListener("submit", cookieCreater)
+function cookieCreater(evt){
+    evt.preventDefault();
+    console.log("cookie");
+    // Cookie exists only for 30 sec
+    document.cookie = "voted=yes; SameSite=None; Secure; max-age=30";
+    hasVoted();
+}
+
+document.getElementById("check_cookie").addEventListener("submit", checkCookies)
+function checkCookies(evt){
+    evt.preventDefault();
+    hasVoted();
+}
+
+function hasVoted(){
+    let allCookies = document.cookie.split("=")
+    console.log(allCookies)
+    if(allCookies[0] == 'voted'){
+        document.getElementById("cookie_alert").innerText = "Cookie present";
+        document.getElementById("cookie").classList.add("visually-hidden")
+    }
+    else{
+        console.log("no cookie")
+        document.getElementById("cookie_alert").innerText = "";
+        document.getElementById("cookie").classList.remove("visually-hidden");
+ 
+    }
+}
+
+
+
+
