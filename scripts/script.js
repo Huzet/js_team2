@@ -96,7 +96,7 @@ function getMovieData({movie_title_input, movie_release_year}) {
     })
     .then(function(data){
         movieCardData(data);
-        createMovieCard(data);
+        createMovieCard();
     })
 
 }
@@ -261,5 +261,7 @@ function getMovieTrailer() {
     })
     .then(function (data1){
         console.log(`https://www.youtube.com/watch?v=${data1.results[0].key}`);
+        movieData[index]["trailer_link"] = `https://www.youtube.com/watch?v=${data1.results[0].key}`;
+        console.log( movieData[index].trailer_link);
     })
 }
