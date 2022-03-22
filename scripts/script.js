@@ -165,7 +165,8 @@ document.getElementById("randomMovieForm").addEventListener("submit", searchRand
 function createMovieCard(){
 const card = document.createElement("div"); 
   card.setAttribute("class", "card")
-  card.style.width = "18rem"; // the width of this card div is 18 rem units
+  card.style.width = "22rem"; 
+  card.style.margin = "5px"
 
   
   document.getElementById("card-container").appendChild(card); // Display the card in the container div
@@ -189,35 +190,42 @@ const card = document.createElement("div");
   infoContainer.setAttribute("class", "card-body");
   card.appendChild(infoContainer);
 
-  const cardTitle = document.createElement("h3")
+  const cardTitle = document.createElement("h3");
   cardTitle.setAttribute("class", "card-title");
   cardTitle.innerText = filmTitle;
   infoContainer.appendChild(cardTitle);
 
-  const cardActors = document.createElement("h5")
-  cardTitle.setAttribute("class", "card-title");
-  cardTitle.innerText = filmActors;
+  const cardActors = document.createElement("h6");
+  cardActors.setAttribute("class", "card-title");
+  cardActors.innerText = filmActors;
   infoContainer.appendChild(cardActors);
 
-  const cardYear = document.createElement("h6")
-  cardTitle.setAttribute("class", "card-subtitle");
-  cardTitle.innerText = filmYear;
+  const cardYear = document.createElement("h7");
+  cardYear.setAttribute("class", "card-subtitle");
+  cardYear.innerText = filmYear;
   infoContainer.appendChild(cardYear);
 
-  const cardGenre = document.createElement("h6")
-  cardTitle.setAttribute("class", "card-subtitle mb-2 text-muted");
-  cardTitle.innerText = filmGenre;
+  const cardGenre = document.createElement("p");
+  cardGenre.setAttribute("class", "card-subtitle mb-2 text-muted");
+  cardGenre.innerText = filmGenre;
   infoContainer.appendChild(cardGenre);
 
-  const cardRating = document.createElement("h6")
-  cardTitle.setAttribute("class", "card-title");
-  cardTitle.innerText =`Rating: ${filmRating}`;
+  const cardPlot = document.createElement("p");
+  cardPlot.setAttribute("class", "card-text lead");
+  cardPlot.innerText = filmPlot;
+  infoContainer.appendChild(cardPlot);
+
+  const cardRating = document.createElement("p");
+  cardRating.setAttribute("class", "card-title");
+  cardRating.innerText =`Rating: ${filmRating}`;
   infoContainer.appendChild(cardRating);
 
-  const cardPlot = document.createElement("p")
-  cardTitle.setAttribute("class", "card-text");
-  cardTitle.innerText = filmPlot;
-  infoContainer.appendChild(cardPlot);
+  const cardTrailer = document.createElement("a");
+  cardTrailer.setAttribute("href","https://www.youtube.com/watch?v=keYOX0Fp_BQ" );
+  cardTrailer.setAttribute("target", "_blank");
+  cardTrailer.setAttribute("class", "btn btn-success");
+  cardTrailer.innerText = "Trailer";
+  infoContainer.appendChild(cardTrailer);
 }
 
 function searchRandomName(evt) {
