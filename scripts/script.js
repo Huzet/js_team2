@@ -53,7 +53,6 @@ function searchMovieButtonPress(evt) {
 }
 
 function getMovieData({movie_title_input, movie_release_year}) {
-    // http://www.omdbapi.com/?t=indiana+jones&apikey=44662e28
     console.log(movie_title_input, movie_release_year)
     console.log((movie_release_year.length < 1))
     let omdb_link;
@@ -123,6 +122,26 @@ function hasVoted(){
  
     }
 }
+
+// Random movie selector
+document.getElementById("randomMovieForm").addEventListener("submit", searchRandomName);
+
+function searchRandomName(evt) {
+    evt.preventDefault();
+
+    let random_api_url = "https://k2maan-moviehut.herokuapp.com/api/random"
+    fetch(random_api_url)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data){
+        getMovieData({
+            movie_title_input: data.name,
+            movie_release_year: ""
+        })
+    })
+}
+
 
 
 
