@@ -70,7 +70,9 @@ function getMovieData({movie_title_input, movie_release_year}) {
     })
     .then(function(data){
         movieCardData(data);
+        createMovieCard(data);
     })
+
 }
 
 function movieCardData(data){
@@ -134,6 +136,65 @@ function hasVoted(){
 // Random movie selector
 document.getElementById("randomMovieForm").addEventListener("submit", searchRandomName);
 
+
+// Creating the movie card from the array given in the 
+function createMovieCard(){
+const card = document.createElement("div"); 
+  card.setAttribute("class", "card")
+  card.style.width = "18rem"; // the width of this card div is 18 rem units
+
+  
+  document.getElementById("card-container").appendChild(card); // Display the card in the container div
+
+  let index = (movieData.length - 1);
+  const filmPoster = movieData[index].Poster;
+  const filmActors = movieData[index].Actors;
+  const filmTitle = movieData[index].Title;
+  const filmRating = movieData[index].imdbRating;
+  const filmGenre = movieData[index].Genre;
+  const filmPlot = movieData[index].Plot;
+  const filmYear = movieData[index].Released;
+
+
+  const cardPoster = document.createElement("img"); 
+  cardPoster.setAttribute("class", "card-img-top");
+  cardPoster.setAttribute("src", filmPoster);
+  card.appendChild(cardPoster);
+  
+  const infoContainer = document.createElement("div");
+  infoContainer.setAttribute("class", "card-body");
+  card.appendChild(infoContainer);
+
+  const cardTitle = document.createElement("h3")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText = filmTitle;
+  infoContainer.appendChild(cardTitle);
+
+  const cardActors = document.createElement("h5")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText = filmActors;
+  infoContainer.appendChild(cardActors);
+
+  const cardYear = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-subtitle");
+  cardTitle.innerText = filmYear;
+  infoContainer.appendChild(cardYear);
+
+  const cardGenre = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-subtitle mb-2 text-muted");
+  cardTitle.innerText = filmGenre;
+  infoContainer.appendChild(cardGenre);
+
+  const cardRating = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText =`Rating: ${filmRating}`;
+  infoContainer.appendChild(cardRating);
+
+  const cardPlot = document.createElement("p")
+  cardTitle.setAttribute("class", "card-text");
+  cardTitle.innerText = filmPlot;
+  infoContainer.appendChild(cardPlot);
+
 function searchRandomName(evt) {
     evt.preventDefault();
 
@@ -148,4 +209,5 @@ function searchRandomName(evt) {
             movie_release_year: ""
         })
     })
+
 }
