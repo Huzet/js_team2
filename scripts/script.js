@@ -71,7 +71,9 @@ function getMovieData({movie_title_input, movie_release_year}) {
     })
     .then(function(data){
         movieCardData(data);
+        createMovieCard(data);
     })
+
 }
 
 function movieCardData(data){
@@ -125,46 +127,33 @@ function hasVoted(){
 }
 
 
-
-// Getting the form input value from the movie title
-const title = document.getElementById("movie_title").value;
-
-
-// Creating the movie card with the information given
-function createMovieCard(title){
+// Creating the movie card from the array given in the 
+function createMovieCard(){
 const card = document.createElement("div"); 
-  
-  card.classList.add("card");
-
+  card.setAttribute("class", "card")
   card.style.width = "18rem"; // the width of this card div is 18 rem units
 
   
-  document.getElementById("cards_container").appendChild(card); // Display the card in the container div
+  document.getElementById("card-container").appendChild(card); // Display the card in the container div
 
- // creating the image from the destination provided. 
- //if there is no destination given, we will retrieve a random unsplash photo
+  let index = (movieData.length - 1);
+  const filmPoster = movieData[index].Poster;
+  const filmActors = movieData[index].Actors;
+  const filmTitle = movieData[index].Title;
+  const filmRating = movieData[index].imdbRating;
+  const filmGenre = movieData[index].Genre;
+  const filmPlot = movieData[index].Plot;
+  const filmYear = movieData[index].Released;
+
+
   const cardPoster = document.createElement("img"); 
-  cardImage.setAttribute("class", "card-img-top");
-
-// Retrieving the info from the api //
-const movieUrl= `https://www.omdbapi.com/?t=${title}}&apikey=44662e28`;
-    fetch(movieUrl)
-    .then((response) => response.json())   
-    .then((data) => {
-    const filmPoster= (data["Poster"]); 
-    const filmActors= (data["Actors"]) 
-    const filmTitle= (data["Title"]) 
-    const filmGenre= (data["Genre"]) 
-    const filmPlot= (data["Plot"]) 
-    const filmRating= (data["imdbRating"]) 
-    console.log(filmPoster, filmActors, filmTitle, filmGenre, filmPlot, filmRating)
-    
-
-  });
+  cardPoster.setAttribute("class", "card-img-top");
   cardPoster.setAttribute("src", filmPoster);
+  card.appendChild(cardPoster);
   
   const infoContainer = document.createElement("div");
   infoContainer.setAttribute("class", "card-body");
+  card.appendChild(infoContainer);
 
   const cardTitle = document.createElement("h3")
   cardTitle.setAttribute("class", "card-title");
@@ -176,8 +165,13 @@ const movieUrl= `https://www.omdbapi.com/?t=${title}}&apikey=44662e28`;
   cardTitle.innerText = filmActors;
   infoContainer.appendChild(cardActors);
 
+  const cardYear = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-subtitle");
+  cardTitle.innerText = filmYear;
+  infoContainer.appendChild(cardYear);
+
   const cardGenre = document.createElement("h6")
-  cardTitle.setAttribute("class", "card-title");
+  cardTitle.setAttribute("class", "card-subtitle mb-2 text-muted");
   cardTitle.innerText = filmGenre;
   infoContainer.appendChild(cardGenre);
 
