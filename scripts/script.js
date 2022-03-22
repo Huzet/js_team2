@@ -1,6 +1,6 @@
 // variables 
 import { secret_key } from "./modules/api_keys.js"
-let movieData = [];
+const movieData = [];
 let myCookie;
 
 const ctx = document.getElementById('myCanvas').getContext('2d');
@@ -79,6 +79,8 @@ function movieCardData(data){
     justPrint();
 }
 
+
+
 // Will delete this. This is just to get data more easier
 function justPrint(){
     // gets last move
@@ -90,35 +92,41 @@ function justPrint(){
     console.log(movieData[index].imdbRating)
     console.log(movieData[index].Actors)
     console.log(movieData[index].Released)
+
+    console.log(movieData)
 }
 
 // Will delete once we place cookie. Cookie will be placed to see if user has voted
-document.getElementById("cookie").addEventListener("submit", cookieCreater)
-function cookieCreater(evt){
+document.getElementById("vote_up").addEventListener("submit", voteUp)
+function voteUp(evt){
     evt.preventDefault();
+    let count = document.getElementById("cookie_alert").innerText;
+    console.log(count)
+    
     console.log("cookie");
     // Cookie exists only for 30 sec
     document.cookie = "voted=yes; SameSite=None; Secure; max-age=30";
+    document.getElementById("cookie_alert").innerText = parseInt(count) + 1;
     hasVoted();
 }
 
+// THis is for testing purposes can delete this along with the html element (used for reseting cookie)
 document.getElementById("check_cookie").addEventListener("submit", checkCookies)
 function checkCookies(evt){
     evt.preventDefault();
     hasVoted();
 }
-
+// will combine this with VoteUp and then delete
 function hasVoted(){
     let allCookies = document.cookie.split("=")
     console.log(allCookies)
     if(allCookies[0] == 'voted'){
-        document.getElementById("cookie_alert").innerText = "Cookie present";
-        document.getElementById("cookie").classList.add("visually-hidden")
+        // document.getElementById("cookie_alert").innerText = "Cookie present";
+        document.getElementById("vote_up").classList.add("visually-hidden")
     }
     else{
         console.log("no cookie")
-        document.getElementById("cookie_alert").innerText = "";
-        document.getElementById("cookie").classList.remove("visually-hidden");
+        document.getElementById("vote_up").classList.remove("visually-hidden");
  
     }
 }
@@ -141,8 +149,3 @@ function searchRandomName(evt) {
         })
     })
 }
-
-
-
-
-
