@@ -14,6 +14,14 @@ header h1 {
     padding-top: 2rem;
 }
 
+header h2 {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+header h6 {
+    font-size: 14px;
+}
+
 nav label {
     font-weight: bold;
 }
@@ -22,32 +30,12 @@ nav {
     background-color: antiquewhite;
 }
 
-/* Formatting out the card and it's elements appearance */
+
 .outline {
     border: 2px solid black;
 }
-
-.card-format {
-    background-color: rgb(204, 201, 201);
-    margin: 8px;
-    display: flex;
-    
-}
-
-
 .movie-image{
     display: flex;
     justify-content: center;
     margin: 8px;
 }
-/* .total-container {
-    display: flex;
-    flex-wrap: wrap;
-    overflow-x: auto;
-    overflow-wrap:initial;
-    margin: 20px;
-    width: 1000px;
-    max-height:fit-content;
-  } */
-
-
