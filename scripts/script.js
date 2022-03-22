@@ -194,6 +194,7 @@ const card = document.createElement("div");
   cardTitle.setAttribute("class", "card-text");
   cardTitle.innerText = filmPlot;
   infoContainer.appendChild(cardPlot);
+}
 
 function searchRandomName(evt) {
     evt.preventDefault();
