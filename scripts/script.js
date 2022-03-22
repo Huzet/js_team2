@@ -126,4 +126,68 @@ function hasVoted(){
 
 
 
+// Getting the form input value from the movie title
+const title = document.getElementById("movie_title").value;
 
+
+// Creating the movie card with the information given
+function createMovieCard(title){
+const card = document.createElement("div"); 
+  
+  card.classList.add("card");
+
+  card.style.width = "18rem"; // the width of this card div is 18 rem units
+
+  
+  document.getElementById("cards_container").appendChild(card); // Display the card in the container div
+
+ // creating the image from the destination provided. 
+ //if there is no destination given, we will retrieve a random unsplash photo
+  const cardPoster = document.createElement("img"); 
+  cardImage.setAttribute("class", "card-img-top");
+
+// Retrieving the info from the api //
+const movieUrl= `https://www.omdbapi.com/?t=${title}}&apikey=44662e28`;
+    fetch(movieUrl)
+    .then((response) => response.json())   
+    .then((data) => {
+    const filmPoster= (data["Poster"]); 
+    const filmActors= (data["Actors"]) 
+    const filmTitle= (data["Title"]) 
+    const filmGenre= (data["Genre"]) 
+    const filmPlot= (data["Plot"]) 
+    const filmRating= (data["imdbRating"]) 
+    console.log(filmPoster, filmActors, filmTitle, filmGenre, filmPlot, filmRating)
+    
+
+  });
+  cardPoster.setAttribute("src", filmPoster);
+  
+  const infoContainer = document.createElement("div");
+  infoContainer.setAttribute("class", "card-body");
+
+  const cardTitle = document.createElement("h3")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText = filmTitle;
+  infoContainer.appendChild(cardTitle);
+
+  const cardActors = document.createElement("h5")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText = filmActors;
+  infoContainer.appendChild(cardActors);
+
+  const cardGenre = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText = filmGenre;
+  infoContainer.appendChild(cardGenre);
+
+  const cardRating = document.createElement("h6")
+  cardTitle.setAttribute("class", "card-title");
+  cardTitle.innerText =`Rating: ${filmRating}`;
+  infoContainer.appendChild(cardRating);
+
+  const cardPlot = document.createElement("p")
+  cardTitle.setAttribute("class", "card-text");
+  cardTitle.innerText = filmPlot;
+  infoContainer.appendChild(cardPlot);
+}
