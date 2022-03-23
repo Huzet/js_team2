@@ -1,3 +1,4 @@
 api_keys.js
 pass.json
 .env
+.DS_Store
