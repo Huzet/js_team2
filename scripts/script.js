@@ -24,10 +24,12 @@ function getMovieData({movie_title_input, movie_release_year}) {
     let node_server_link;
 
     if (movie_release_year.length < 1){
-        node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}`;
+        // node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}`;
+        node_server_link = `https://movie-voter.herokuapp.com/request?movie_title=${movie_title_input}`;
     }
     else {
-        node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}&movie_year=${movie_release_year}`;
+        // node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}&movie_year=${movie_release_year}`;
+        node_server_link = `https://movie-voter.herokuapp.com/request?movie_title=${movie_title_input}&movie_year=${movie_release_year}`;
     }
 
     fetch(node_server_link)
@@ -81,7 +83,8 @@ document.getElementById("randomMovieForm").addEventListener("submit", searchRand
 function searchRandomName(evt) {
     evt.preventDefault();
 
-    let random_api_url = "http://localhost:3000/random"
+    // let random_api_url = "http://localhost:3000/random"
+    let random_api_url = "https://movie-voter.herokuapp.com/random"
     fetch(random_api_url)
     .then(function (response){
         return response.json();
@@ -100,7 +103,8 @@ function getMovieTrailer() {
     let imdb_id = movieData[index].imdbID
 
     // use that ID to search for youTube trailer
-    let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`
+    // let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`
+    let api_moviedb_api_url = `https://movie-voter.herokuapp.com/trailer?imdbid=${imdb_id}`
     fetch(api_moviedb_api_url)
     .then(function (response){
         return response.json();
