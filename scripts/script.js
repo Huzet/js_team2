@@ -82,19 +82,23 @@ function getMovieData({movie_title_input, movie_release_year}) {
     console.log(movie_title_input, movie_release_year)
     console.log((movie_release_year.length < 1))
     let omdb_link;
+    let node_server_link;
+
+    
 
     if (movie_release_year.length < 1){
-        omdb_link = `http://www.omdbapi.com/?t=${movie_title_input}&apikey=${secret_key}`;
+        node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}`;
     }
     else {
-        omdb_link = `http://www.omdbapi.com/?t=${movie_title_input}&y=${movie_release_year}&apikey=${secret_key}`;
+        node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}&movie_year=${movie_release_year}`;
     }
 
-    fetch(omdb_link)
+    fetch(node_server_link)
     .then(function (response){
         return response.json();
     })
     .then(function(data){
+        // console.log(data)
         movieCardData(data);
         createMovieCard();
     })
@@ -234,7 +238,7 @@ const card = document.createElement("div");
 function searchRandomName(evt) {
     evt.preventDefault();
 
-    let random_api_url = "https://k2maan-moviehut.herokuapp.com/api/random"
+    let random_api_url = "http://localhost:3000/random"
     fetch(random_api_url)
     .then(function (response){
         return response.json();
@@ -254,7 +258,7 @@ function getMovieTrailer() {
     let imdb_id = movieData[index].imdbID
 
     // use that ID to search for youTube trailer
-    let api_moviedb_api_url = `https://api.themoviedb.org/3/movie/${imdb_id}/videos?api_key=${secret_key_imdb}&language=en-US`
+    let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`
     fetch(api_moviedb_api_url)
     .then(function (response){
         return response.json();
