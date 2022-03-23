@@ -8,6 +8,10 @@ const server = express();
 const port = process.env.PORT || 3000;
 const fs = require('fs');
 
+//assuming app is express Object.
+server.get('/',function(req,res) {
+    res.sendFile('index.html');
+  });
 
 // enabling cors
 server.use(cors());
