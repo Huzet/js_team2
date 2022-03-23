@@ -24,12 +24,63 @@ nav {
     background-color: antiquewhite;
 }
 
-
 .outline {
     border: 2px solid black;
 }
+
 .movie-image{
     display: flex;
     justify-content: center;
     margin: 8px;
+}
+
+#containerSection{
+    background-color: gray;
+}
+
+#card-container {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.movie-image{
+    display: flex;
+    justify-content: center;
+    margin: 8px;
+    margin-top: 15px;
+}
+
+#movieInfoContainer{
+   display: grid; 
+    
+}
+
+#movieCardTitle {
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#movieYear {
+    justify-self:center;
+    margin-top: 3px;  
+}
+
+.movieCardActors {
+    justify-self: center;
+    text-align: center;
+}
+
+#movieCardModal {
+    justify-self: center;
+    width: 60%;
+    margin-top: 8px;  
+}
+
+.flexbox {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
 }
