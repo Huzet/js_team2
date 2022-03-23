@@ -202,9 +202,9 @@ function createMovieCard(){
     cardTrailer.innerText = "Trailer";
     infoContainer.appendChild(cardTrailer);
 
-    drawRatingChart({
-        dataArr: getRatingForChart(),
-        labelsArr: getTitleForChart(),
+    drawBarChart({
+        dataArr: getRating(),
+        labelsArr: getTitle(),
         bgColorsArr: generateRandomColors({
             howMany: movieData.length
         }),
@@ -212,17 +212,16 @@ function createMovieCard(){
             howMany: movieData.length
         })
     })
-    drawVoteChart({
-        // TODO This need to get the vote not rating
-        dataArr: getRatingForChart(),
-        labelsArr: getTitleForChart(),
+    drawDoughnutChart({
+        dataArr: getBoxOffice(),
+        labelsArr: getTitle(),
         bgColorsArr: generateRandomColors({
             howMany: movieData.length
         })
     })
 }
 
-function getTitleForChart() {
+function getTitle() {
     const titleArr = []
     for (let index = 0; index < movieData.length; index++) {
         titleArr[index] = movieData[index].Title;
@@ -230,7 +229,7 @@ function getTitleForChart() {
     return titleArr;
 }
 
-function getRatingForChart() {
+function getRating() {
     const ratingArr = []
     for (let index = 0; index < movieData.length; index++) {
         ratingArr[index] = movieData[index].imdbRating;
@@ -238,8 +237,17 @@ function getRatingForChart() {
     return ratingArr;
 }
 
+function getBoxOffice() {
+    const boxOfficeArr = []
+    for (let index = 0; index < movieData.length; index++) {
+        boxOfficeArr[index] = Number(movieData[index].BoxOffice.replace(/[^0-9.-]+/g,""));
+    }
+    console.log(boxOfficeArr);
+    return boxOfficeArr;
+}
+
 // bar chart for rating
-function drawRatingChart({
+function drawBarChart({
     dataArr,
     labelsArr,
     bgColorsArr,
@@ -271,7 +279,7 @@ function drawRatingChart({
 }
 
 // doughnut chart for vote
-function drawVoteChart({
+function drawDoughnutChart({
     dataArr,
     labelsArr,
     bgColorsArr
@@ -284,7 +292,7 @@ function drawVoteChart({
         data: {
             labels: labelsArr,
             datasets: [{
-                label: 'Movie Votes',
+                label: 'Box Office',
                 data: dataArr,
                 backgroundColor: bgColorsArr,
                 hoverOffset: 4
