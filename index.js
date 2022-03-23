@@ -8,14 +8,21 @@ const server = express();
 const port = process.env.PORT || 3000;
 const fs = require('fs');
 
+server.use(express.static('public'))
+server.use(cors());
+
 const path = require('path');
-//assuming app is express Object.
+
 server.get('/',function(req,res) {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
+
+
+// server.use(express.static(__dirname + '/scripts'));
+// server.use(express.static(__dirname + '/styles'));
 // enabling cors
-server.use(cors());
+
 
 // console.log(process);
 
