@@ -118,64 +118,85 @@ function getMovieTrailer() {
 
 // Creating the movie card from the array given in the 
 function createMovieCard(){
-    let index = (movieData.length - 1);
-    const filmPoster = movieData[index].Poster;
-    const filmActors = movieData[index].Actors;
-    const filmTitle = movieData[index].Title;
-    const filmRating = movieData[index].imdbRating;
-    const filmGenre = movieData[index].Genre;
-    const filmPlot = movieData[index].Plot;
-    const filmYear = movieData[index].Released;
-
     const card = document.createElement("div"); 
-    card.setAttribute("class", "card")
-    card.style.width = "22rem"; 
-    card.style.margin = "5px"
-    document.getElementById("card-container").appendChild(card); // Display the card in the container div
-
-    const cardPoster = document.createElement("img"); 
-    cardPoster.setAttribute("class", "card-img-top");
-    cardPoster.setAttribute("src", filmPoster);
-    card.appendChild(cardPoster);
+      card.setAttribute("class", "card")
+      card.style.width = "22rem"; 
+      card.style.margin = "5px"
     
-    const infoContainer = document.createElement("div");
-    infoContainer.setAttribute("class", "card-body");
-    card.appendChild(infoContainer);
-
-    const cardTitle = document.createElement("h3");
-    cardTitle.setAttribute("class", "card-title");
-    cardTitle.setAttribute("class", "movieTitle");
-    cardTitle.innerText = filmTitle;
-    infoContainer.appendChild(cardTitle);
-
-    const cardActors = document.createElement("h6");
-    cardActors.setAttribute("class", "card-title");
-    cardActors.innerText = filmActors;
-    infoContainer.appendChild(cardActors);
-
-    const cardYear = document.createElement("h7");
-    cardYear.setAttribute("class", "card-subtitle");
-    cardYear.innerText = filmYear;
-    infoContainer.appendChild(cardYear);
-
-    const cardGenre = document.createElement("p");
-    cardGenre.setAttribute("class", "card-subtitle mb-2 text-muted");
-    cardGenre.innerText = filmGenre;
-    infoContainer.appendChild(cardGenre);
-
-    const cardPlot = document.createElement("p");
-    cardPlot.setAttribute("class", "card-text lead");
-    cardPlot.innerText = filmPlot;
-    infoContainer.appendChild(cardPlot);
-
-    const cardRating = document.createElement("p");
-    cardRating.setAttribute("class", "card-title");
-    cardRating.setAttribute("class", "movieRating");
-    cardRating.innerText = filmRating;
-    infoContainer.appendChild(cardRating);
+      
+      document.getElementById("card-container").appendChild(card); // Display the card in the container div
+    
+      let index = (movieData.length - 1);
+      const filmPoster = movieData[index].Poster;
+      const filmActors = movieData[index].Actors;
+      const filmTitle = movieData[index].Title;
+      const filmRating = movieData[index].imdbRating;
+      const filmGenre = movieData[index].Genre;
+      const filmPlot = movieData[index].Plot;
+      const filmYear = movieData[index].Released;
+    
+    
+      const cardPoster = document.createElement("img"); 
+      cardPoster.setAttribute("class", "card-img-top");
+      cardPoster.setAttribute("src", filmPoster);
+      card.appendChild(cardPoster);
+      
+      const infoContainer = document.createElement("div");
+      infoContainer.setAttribute("class", "card-body");
+      infoContainer.setAttribute("id", "movieInfoContainer")
+      card.appendChild(infoContainer);
+    
+      const cardTitle = document.createElement("h3");
+      cardTitle.setAttribute("class", "card-title");
+      cardTitle.setAttribute("id", "movieCardTitle")
+      cardTitle.innerText = filmTitle;
+      infoContainer.appendChild(cardTitle);
+    
+      const cardYear = document.createElement("h7");
+      cardYear.setAttribute("class", "card-subtitle");
+      cardYear.setAttribute("id", "movieYear")
+      cardYear.innerText = filmYear;
+      infoContainer.appendChild(cardYear);
+    
+      // Creating modal button to show more information
+      const cardModal = document.createElement("button");
+      cardModal.setAttribute("type", "button");
+      cardModal.setAttribute("id", "movieCardModal")
+      cardModal.setAttribute("class", "btn btn-primary");
+      cardModal.setAttribute("data-bs-toggle", "modal");
+      cardModal.setAttribute("data-bs-target", "#movieModal");
+      cardModal.innerText ="More Information"
+      infoContainer.appendChild(cardModal);
+    
+      // Modal pop-up display
+      const modePop = document.createElement("div")
+      modePop.setAttribute("class", "modal fade");
+      modePop.setAttribute("id", "movieModal");
+      modePop.setAttribute("tabindex", "-1");
+      modePop.setAttribute("aria-labelledby", "exampleModalLabel");
+      modePop.setAttribute("aria-hidden","true");
+      document.getElementById("card-container").appendChild(modePop);
+    
+    //   const modeDialogue = document.createElement("div")
+    //   modeDialogue.setAttribute("class", "modal-dialogue");
+    //   modePop.appendChild(modeDialogue);
+    
+    //   const modeContent = document.createElement("div")
+    //   modeContent.setAttribute("class", "modal-content");
+    //   modeDialogue.appendChild(modeContent);
+    
+    //   const modeHeader = document.createElement("div")
+    //   modeContent.setAttribute("class", "modal-header");
+    //   modeContent.appendChild(modeHeader);
+    
+    //   const cardActors = document.createElement("h5");
+    //   cardActors.setAttribute("class", "modal-title");
+    //   cardActors.setAttribute("id", "exampleModalLabel")
+    //   cardActors.innerText = "filmActors";
+    //   modeHeader.appendChild(cardActors);
 
     const cardTrailer = document.createElement("a");
-    cardTrailer.setAttribute("href","https://www.youtube.com/watch?v=keYOX0Fp_BQ" );
+    cardTrailer.setAttribute("href", movieData[index].trailer_link);
     cardTrailer.setAttribute("target", "_blank");
     cardTrailer.setAttribute("class", "btn btn-success");
     cardTrailer.innerText = "Trailer";
