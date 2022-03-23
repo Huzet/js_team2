@@ -1,6 +1,4 @@
 // variables 
-import { secret_key } from "./modules/api_keys.js"
-import { secret_key_imdb } from "./modules/api_keys.js"
 const movieData = [];
 const ctxRating = document.getElementById('movieRating').getContext('2d');
 const ctxVote = document.getElementById('movieVote').getContext('2d');

@@ -14,8 +14,8 @@ server.get('/',function(req,res) {
     res.sendFile(path.join(__dirname, '/index.html'));
   });
 
-server.use(express.static(__dirname + '/scripts'));
-server.use(express.static(__dirname + '/styles'));
+// server.use(express.static(__dirname + '/scripts'));
+// server.use(express.static(__dirname + '/styles'));
 // enabling cors
 server.use(cors());
 
