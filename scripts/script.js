@@ -2,63 +2,10 @@
 import { secret_key } from "./modules/api_keys.js"
 import { secret_key_imdb } from "./modules/api_keys.js"
 const movieData = [];
-
-let myCookie;
-
-// chart for rating
 const ctxRating = document.getElementById('movieRating').getContext('2d');
-const chartRating = new Chart(ctxRating, {
-    type: 'bar',
-    data: {
-        // get movie name
-        labels: ['Movie1', 'Movie2', 'Movie3'],
-        datasets: [{
-            label: 'Movie Rating',
-            // get movie rating
-            data: [6.6, 8.6, 5.3],
-            backgroundColor: [
-                // function to set colors depands on how many movies
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-// chart for vote
 const ctxVote = document.getElementById('movieVote').getContext('2d');
-const chartVote = new Chart(ctxVote, {
-    type: 'doughnut',
-    data: {
-        // get moive name
-        labels: ['Movie1', 'Movie2', 'Movie3'],
-        datasets: [{
-            label: 'Votes',
-            // get votes
-            data: [5, 9, 3],
-            backgroundColor: [
-            // function to set how many colors depands on how many movies
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-            ],
-            hoverOffset: 4
-        }]
-}});
+let myRatingChart = undefined;
+let myVoteChart = undefined;
 
 // Search Bar 
 
@@ -67,24 +14,14 @@ document.getElementById("searchMovieForm").addEventListener("submit", searchMovi
 
 function searchMovieButtonPress(evt) {
     evt.preventDefault();
-    
-    // console.log(evt);
-    // user input variables
     const movie_title_input = evt.target.elements[1].value.replace(/ /g,"+");;
     const movie_release_year = evt.target.elements[2].value;
 
-    getMovieData({
-        movie_title_input, 
-        movie_release_year});
+    getMovieData({movie_title_input, movie_release_year});
 }
 
 function getMovieData({movie_title_input, movie_release_year}) {
-    console.log(movie_title_input, movie_release_year)
-    console.log((movie_release_year.length < 1))
-    let omdb_link;
     let node_server_link;
-
-    
 
     if (movie_release_year.length < 1){
         node_server_link = `http://localhost:3000/request?movie_title=${movie_title_input}`;
@@ -98,35 +35,10 @@ function getMovieData({movie_title_input, movie_release_year}) {
         return response.json();
     })
     .then(function(data){
-        // console.log(data)
-        movieCardData(data);
+        movieData.push(data);
+        getMovieTrailer();
         createMovieCard();
     })
-
-}
-
-function movieCardData(data){
-    movieData.push(data)
-    // will delete
-    justPrint();
-}
-
-
-
-// Will delete this. This is just to get data more easier
-function justPrint(){
-    // gets last move
-    let index = (movieData.length - 1);
-
-    console.log(movieData[index].Title)
-    console.log(movieData[index].Poster)
-    console.log(movieData[index].Genre)
-    console.log(movieData[index].imdbRating)
-    console.log(movieData[index].Actors)
-    console.log(movieData[index].Released)
-
-    console.log(movieData)
-    getMovieTrailer()
 }
 
 // Will delete once we place cookie. Cookie will be placed to see if user has voted
@@ -160,80 +72,11 @@ function hasVoted(){
     else{
         console.log("no cookie")
         document.getElementById("vote_up").classList.remove("visually-hidden");
- 
     }
 }
 
 // Random movie selector
 document.getElementById("randomMovieForm").addEventListener("submit", searchRandomName);
-
-
-// Creating the movie card from the array given in the 
-function createMovieCard(){
-const card = document.createElement("div"); 
-  card.setAttribute("class", "card")
-  card.style.width = "22rem"; 
-  card.style.margin = "5px"
-
-  
-  document.getElementById("card-container").appendChild(card); // Display the card in the container div
-
-  let index = (movieData.length - 1);
-  const filmPoster = movieData[index].Poster;
-  const filmActors = movieData[index].Actors;
-  const filmTitle = movieData[index].Title;
-  const filmRating = movieData[index].imdbRating;
-  const filmGenre = movieData[index].Genre;
-  const filmPlot = movieData[index].Plot;
-  const filmYear = movieData[index].Released;
-
-
-  const cardPoster = document.createElement("img"); 
-  cardPoster.setAttribute("class", "card-img-top");
-  cardPoster.setAttribute("src", filmPoster);
-  card.appendChild(cardPoster);
-  
-  const infoContainer = document.createElement("div");
-  infoContainer.setAttribute("class", "card-body");
-  card.appendChild(infoContainer);
-
-  const cardTitle = document.createElement("h3");
-  cardTitle.setAttribute("class", "card-title");
-  cardTitle.innerText = filmTitle;
-  infoContainer.appendChild(cardTitle);
-
-  const cardActors = document.createElement("h6");
-  cardActors.setAttribute("class", "card-title");
-  cardActors.innerText = filmActors;
-  infoContainer.appendChild(cardActors);
-
-  const cardYear = document.createElement("h7");
-  cardYear.setAttribute("class", "card-subtitle");
-  cardYear.innerText = filmYear;
-  infoContainer.appendChild(cardYear);
-
-  const cardGenre = document.createElement("p");
-  cardGenre.setAttribute("class", "card-subtitle mb-2 text-muted");
-  cardGenre.innerText = filmGenre;
-  infoContainer.appendChild(cardGenre);
-
-  const cardPlot = document.createElement("p");
-  cardPlot.setAttribute("class", "card-text lead");
-  cardPlot.innerText = filmPlot;
-  infoContainer.appendChild(cardPlot);
-
-  const cardRating = document.createElement("p");
-  cardRating.setAttribute("class", "card-title");
-  cardRating.innerText =`Rating: ${filmRating}`;
-  infoContainer.appendChild(cardRating);
-
-  const cardTrailer = document.createElement("a");
-  cardTrailer.setAttribute("href","https://www.youtube.com/watch?v=keYOX0Fp_BQ" );
-  cardTrailer.setAttribute("target", "_blank");
-  cardTrailer.setAttribute("class", "btn btn-success");
-  cardTrailer.innerText = "Trailer";
-  infoContainer.appendChild(cardTrailer);
-}
 
 function searchRandomName(evt) {
     evt.preventDefault();
@@ -252,7 +95,6 @@ function searchRandomName(evt) {
 }
 
 function getMovieTrailer() {
-
     // Get movie ID
     let index = (movieData.length - 1);
     let imdb_id = movieData[index].imdbID
@@ -268,4 +110,176 @@ function getMovieTrailer() {
         movieData[index]["trailer_link"] = `https://www.youtube.com/watch?v=${data1.results[0].key}`;
         console.log( movieData[index].trailer_link);
     })
+}
+
+// Creating the movie card from the array given in the 
+function createMovieCard(){
+    let index = (movieData.length - 1);
+    const filmPoster = movieData[index].Poster;
+    const filmActors = movieData[index].Actors;
+    const filmTitle = movieData[index].Title;
+    const filmRating = movieData[index].imdbRating;
+    const filmGenre = movieData[index].Genre;
+    const filmPlot = movieData[index].Plot;
+    const filmYear = movieData[index].Released;
+
+    const card = document.createElement("div"); 
+    card.setAttribute("class", "card")
+    card.style.width = "22rem"; 
+    card.style.margin = "5px"
+    document.getElementById("card-container").appendChild(card); // Display the card in the container div
+
+    const cardPoster = document.createElement("img"); 
+    cardPoster.setAttribute("class", "card-img-top");
+    cardPoster.setAttribute("src", filmPoster);
+    card.appendChild(cardPoster);
+    
+    const infoContainer = document.createElement("div");
+    infoContainer.setAttribute("class", "card-body");
+    card.appendChild(infoContainer);
+
+    const cardTitle = document.createElement("h3");
+    cardTitle.setAttribute("class", "card-title");
+    cardTitle.setAttribute("class", "movieTitle");
+    cardTitle.innerText = filmTitle;
+    infoContainer.appendChild(cardTitle);
+
+    const cardActors = document.createElement("h6");
+    cardActors.setAttribute("class", "card-title");
+    cardActors.innerText = filmActors;
+    infoContainer.appendChild(cardActors);
+
+    const cardYear = document.createElement("h7");
+    cardYear.setAttribute("class", "card-subtitle");
+    cardYear.innerText = filmYear;
+    infoContainer.appendChild(cardYear);
+
+    const cardGenre = document.createElement("p");
+    cardGenre.setAttribute("class", "card-subtitle mb-2 text-muted");
+    cardGenre.innerText = filmGenre;
+    infoContainer.appendChild(cardGenre);
+
+    const cardPlot = document.createElement("p");
+    cardPlot.setAttribute("class", "card-text lead");
+    cardPlot.innerText = filmPlot;
+    infoContainer.appendChild(cardPlot);
+
+    const cardRating = document.createElement("p");
+    cardRating.setAttribute("class", "card-title");
+    cardRating.setAttribute("class", "movieRating");
+    cardRating.innerText = filmRating;
+    infoContainer.appendChild(cardRating);
+
+    const cardTrailer = document.createElement("a");
+    cardTrailer.setAttribute("href","https://www.youtube.com/watch?v=keYOX0Fp_BQ" );
+    cardTrailer.setAttribute("target", "_blank");
+    cardTrailer.setAttribute("class", "btn btn-success");
+    cardTrailer.innerText = "Trailer";
+    infoContainer.appendChild(cardTrailer);
+
+    drawRatingChart({
+        dataArr: getRatingForChart(),
+        labelsArr: getTitleForChart(),
+        bgColorsArr: generateRandomColors({
+            howMany: movieData.length
+        }),
+        borderColorsArr: generateRandomColors({
+            howMany: movieData.length
+        })
+    })
+    drawVoteChart({
+        // TODO This need to get the vote not rating
+        dataArr: getRatingForChart(),
+        labelsArr: getTitleForChart(),
+        bgColorsArr: generateRandomColors({
+            howMany: movieData.length
+        })
+    })
+}
+
+function getTitleForChart() {
+    const titleArr = []
+    for (let index = 0; index < movieData.length; index++) {
+        titleArr[index] = movieData[index].Title;
+    }
+    return titleArr;
+}
+
+function getRatingForChart() {
+    const ratingArr = []
+    for (let index = 0; index < movieData.length; index++) {
+        ratingArr[index] = movieData[index].imdbRating;
+    }
+    return ratingArr;
+}
+
+// bar chart for rating
+function drawRatingChart({
+    dataArr,
+    labelsArr,
+    bgColorsArr,
+    borderColorsArr
+}){
+    if (myRatingChart !== undefined) {
+        myRatingChart.destroy();
+    }
+    myRatingChart = new Chart(ctxRating, {
+        type: 'bar',
+        data: {
+            labels: labelsArr,
+            datasets: [{
+                label: 'Movie Rating',
+                data: dataArr,
+                backgroundColor: bgColorsArr,
+                borderColor: borderColorsArr,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+    })
+}
+
+// doughnut chart for vote
+function drawVoteChart({
+    dataArr,
+    labelsArr,
+    bgColorsArr
+}){
+    if (myVoteChart !== undefined) {
+        myVoteChart.destroy();
+    }
+    myVoteChart = new Chart(ctxVote, {
+        type: 'doughnut',
+        data: {
+            labels: labelsArr,
+            datasets: [{
+                label: 'Movie Votes',
+                data: dataArr,
+                backgroundColor: bgColorsArr,
+                hoverOffset: 4
+            }]
+        }
+    })
+};
+
+function generateRandomColors({ howMany }) {
+    const randColors = [];
+    for (let index = 0; index < howMany; index++) {
+      const rangeOfColors = "0123456789ABCDEF";
+      let color = "#";
+  
+      for (let index = 0; index < 6; index++) {
+        const randIdx = Math.floor(Math.random() * rangeOfColors.length);
+        color += rangeOfColors[randIdx];
+      }
+  
+      randColors.push(color);
+    }
+    return randColors;
 }
