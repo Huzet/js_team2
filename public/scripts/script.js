@@ -51,41 +51,6 @@ function getMovieData({ movie_title_input, movie_release_year }) {
     });
 }
 
-// Will delete once we place cookie. Cookie will be placed to see if user has voted
-document.getElementById("vote_up").addEventListener("submit", voteUp);
-function voteUp(evt) {
-  evt.preventDefault();
-  let count = document.getElementById("cookie_alert").innerText;
-  console.log(count);
-
-  console.log("cookie");
-  // Cookie exists only for 30 sec
-  document.cookie = "voted=yes; SameSite=None; Secure; max-age=30";
-  document.getElementById("cookie_alert").innerText = parseInt(count) + 1;
-  hasVoted();
-}
-
-// THis is for testing purposes can delete this along with the html element (used for reseting cookie)
-document
-  .getElementById("check_cookie")
-  .addEventListener("submit", checkCookies);
-function checkCookies(evt) {
-  evt.preventDefault();
-  hasVoted();
-}
-// will combine this with VoteUp and then delete
-function hasVoted() {
-  let allCookies = document.cookie.split("=");
-  console.log(allCookies);
-  if (allCookies[0] == "voted") {
-    // document.getElementById("cookie_alert").innerText = "Cookie present";
-    document.getElementById("vote_up").classList.add("visually-hidden");
-  } else {
-    console.log("no cookie");
-    document.getElementById("vote_up").classList.remove("visually-hidden");
-  }
-}
-
 // Random movie selector
 document
   .getElementById("randomMovieForm")
@@ -177,20 +142,38 @@ function createMovieCard() {
   cardYear.innerText = filmYear;
   flipCardFront.appendChild(cardYear);
 
+  const flipCardBack = document.createElement("div");
+  flipCardBack.setAttribute("class", "card_back");
+  flipBack.appendChild(flipCardBack);
+
   // Adding the button to the totalCardContainer
   const cardTrailer = document.createElement("a");
   cardTrailer.setAttribute("class", "btn btn-success");
   cardTrailer.setAttribute("id", index);
   cardTrailer.setAttribute("type", "submit");
-  cardTrailer.onclick = edit_button;
+  cardTrailer.onclick = button_action_trailer;
   cardTrailer.innerText = "Trailer";
-  cardTrailer.style.marginLeft = "133px";
-
   totalCardContainer.appendChild(cardTrailer);
 
-  const flipCardBack = document.createElement("div");
-  flipCardBack.setAttribute("class", "card_back");
-  flipBack.appendChild(flipCardBack);
+  // ADD TO NEW BRANCH
+  const cardLikeButton = document.createElement("a");
+  cardLikeButton.setAttribute("class", "btn btn-success");
+  cardLikeButton.setAttribute("type", "submit");
+  cardLikeButton.onclick = like_button_press;
+  cardLikeButton.innerHTML = '<i class="bi bi-hand-thumbs-up-fill">0</i>';
+  totalCardContainer.appendChild(cardLikeButton);
+
+  const cardLikeButton1 = document.createElement("a");
+  cardLikeButton1.setAttribute("class", "btn btn-danger");
+  cardLikeButton1.setAttribute("type", "submit");
+  cardLikeButton1.onclick = delete_button_press;
+  cardLikeButton1.innerHTML = "Delete";
+  totalCardContainer.appendChild(cardLikeButton1);
+
+  const cardLikeButtonSmall = document.createElement("p");
+  cardLikeButtonSmall.innerHTML = "";
+  totalCardContainer.appendChild(cardLikeButtonSmall);
+  //
 
   const flipCardBackPara = document.createElement("p");
   flipCardBackPara.style.fontSize = "10px";
@@ -352,9 +335,52 @@ function generateRandomColors({ howMany }) {
   return randColors;
 }
 
-function edit_button(evt) {
+function button_action_trailer(evt) {
   let index = parseInt(evt.target.id);
   let movieTrailer = movieData[index].trailer_link;
   console.log("Movie trailer: " + movieTrailer);
-  window.open(movieTrailer);
+  window.open(movieTrailer, "_blank");
+}
+
+// ADD TO NEW BRANCH
+function like_button_press(evt) {
+  let votes = parseInt(evt.target.children[0].innerText);
+  let allCookies = document.cookie.split("=");
+
+  if (allCookies[0] == "voted") {
+    evt.target.parentElement.children[4].innerText = "You already voted";
+  } else {
+    votes++;
+    evt.target.children[0].innerText = votes;
+    document.cookie = "voted=yes; SameSite=None; Secure; max-age=8";
+    evt.target.parentElement.children[4].innerText = "Vote Accepted";
+  }
+}
+
+function getMovieTitles() {
+  let movie_titles_html = document.querySelectorAll("#movieCardTitle");
+  let movie_titles = [];
+  for (let count = 0; count < movie_titles_html.length; count++) {
+    let title = movie_titles_html[count].innerText;
+    // console.log(count)
+    movie_titles.push(title);
+  }
+  return movie_titles;
+}
+
+document
+  .getElementById("list_movies")
+  .addEventListener("submit", pasteToClipBoard);
+
+function pasteToClipBoard(evt) {
+  evt.preventDefault();
+  let movie_titles = getMovieTitles().join(", ");
+  console.log(movie_titles);
+  navigator.clipboard.writeText(movie_titles);
+  alert(movie_titles);
+}
+
+function delete_button_press(evt) {
+  console.log("I work");
+  evt.target.parentElement.remove();
 }

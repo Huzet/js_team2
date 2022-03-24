@@ -24,7 +24,7 @@
         <!-- Title -->
         <header class="jumbotron jumbotron-fluid bg-white">    
             <h1 class="display-4 bg-white text-dark"><i class="bi bi-film"></i>
-                Cinema information
+                Cinema Information
             </h1>
         </header>
         <!-- Search -->
@@ -58,32 +58,16 @@
                         <button type="submit" class="btn btn-primary">Random Movie</button> 
                       </div>
                       <small>Picks a random movie for you</small>
-                      <div class="col-sm">
-                        <!-- <label for="pick_genre">Please pick a Genre you would like to watch</label>
-                        <select class="form-control" id="pick_genre">
-                            <option>Please pick genre...</option>
-                          <option>Sci-fi</option>
-                          <option>Comedy</option>
-                          <option>Drama</option>
-                          <option>Romance</option>
-                          <option>Horror</option>
-                        </select> -->
-                      </div>
                       <div class="col-sm"></div>
                       </div>
                     </div>
                   </div>
                 </form>
         </nav>
-        <!-- This is a temp holder and will get deleted once voting is implemented -->
-        <form id="vote_up" class="">
-          <button id="vote_up_button" type="submit" class="btn btn-primary"><i class="bi bi-hand-thumbs-up-fill"></i></button>
-        </form>
-        <form id="check_cookie"> 
-          <button id="check_cookie_button" type="submit" class="btn btn-primary">Check Voted</button>
-        </form>
-        <div id="cookie_alert" class="alert-danger" role="alert">0</div>
-        
+        <!-- Pulls titles -->
+        <form id="list_movies" class="">
+          <button id="list_movies_button" type="submit" class="btn btn-primary"><i class="bi bi-bookmark-fill"></i>Copy Clipboard</button>
+        </form>        
         <!-- Cards -->
         <section class="">
           <div class="container cardDiv" id="card-container">
