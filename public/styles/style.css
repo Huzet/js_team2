@@ -176,3 +176,28 @@ footer {
   margin-top: 5px;
   justify-content: center;
 }
+
+/* Page colors */
+
+html{
+  background-color: #264653;
+}
+
+nav {
+  background-image: linear-gradient(white, #E9C46A, #F4A261);
+}
+#list_movies {
+  background-image: linear-gradient(#F4A261, white)
+}
+#graphs_holder_css{
+  background-image: linear-gradient(white, #F4A261, #264653);
+  background-color: #F4A261;
+}
+
+#card_holder{
+  background-color: #2A9D8F;
+}
+
+#footer_conatiner{
+  background-color: #264653;
+}
