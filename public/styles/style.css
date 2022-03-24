@@ -24,6 +24,13 @@ nav {
     background-color: antiquewhite;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  margin-left: 100px;
+  margin-right: auto;
+}
+
 .outline {
     border: 2px solid black;
 }
@@ -37,8 +44,6 @@ nav {
 #containerSection{
     background-color: gray;
 }
-
-
 
 .movie-image{
     display: flex;
@@ -82,6 +87,7 @@ nav {
   --dark: #264653;
   --light: #E9C46A;
 }
+
 #card-container {
   width: 110%;
   height: fit-content;
@@ -90,6 +96,7 @@ nav {
   flex-direction:row;
   flex-wrap: wrap;
 }
+
 .posterSize {
   width: 200px;
   height: 280px;
@@ -97,9 +104,11 @@ nav {
   justify-self: center;
   align-self: baseline;
 }
+
 .spread {
   width: 100%;
 }
+
 .card {
   margin: 8px;
   width: 310px;
@@ -109,10 +118,11 @@ nav {
   align-content: center;
   position: relative;
 }
-.card:hover .card_inner {
-  
+
+.card:hover .card_inner { 
   transform: rotateY(-180deg);
 }
+
 .card_inner {
   position: absolute;
   display: flex;
@@ -122,12 +132,11 @@ nav {
   transition: 1.0s ease;
 }
 
-
 .card_front {
   display: grid;
   align-items: center;
   justify-content:center;
- position: absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: visible;
@@ -141,6 +150,7 @@ nav {
   margin-top: 16px;
   justify-items: center;
 }
+
 .card_back {
  position: absolute;
  width: 70%;
@@ -150,9 +160,7 @@ nav {
  border-radius: 16px;
  align-self: center;
  backface-visibility: hidden;
- 
 }
-
 
 #movieYear {
   color: #FFF;
