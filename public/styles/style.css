@@ -119,7 +119,7 @@ nav {
   width: 100%;
   height: 100%;
   perspective: 1000px;
-  transition: 3.0s ease;
+  transition: 1.0s ease;
 }
 
 
@@ -142,14 +142,14 @@ nav {
   justify-items: center;
 }
 .card_back {
- position: relative;
- width: 100%;
- height: 100%;
+ position: absolute;
+ width: 70%;
+ height: 70%;
  perspective: 1000px;
  background-image: linear-gradient(to bottom left, var(--primary), var(--dark));
  border-radius: 16px;
  align-self: center;
- backface-visibility: visible;
+ backface-visibility: hidden;
  
 }
 

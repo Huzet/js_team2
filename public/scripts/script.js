@@ -103,24 +103,25 @@ function searchRandomName(evt) {
     })
 }
 
-// function getMovieTrailer() {
-//     // Get movie ID
-//     let index = (movieData.length - 1);
-//     let imdb_id = movieData[index].imdbID
+function getMovieTrailer() {
+    // Get movie ID
+    let index = (movieData.length - 1);
+    let imdb_id = movieData[index].imdbID
 
-//     // use that ID to search for youTube trailer
-//     let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`
-//     //let api_moviedb_api_url = `https://movie-voter.herokuapp.com/trailer?imdbid=${imdb_id}`
-//     fetch(api_moviedb_api_url)
-//     .then(function (response){
-//         return response.json();
-//     })
-//     .then(function (data1){
-//         console.log(`https://www.youtube.com/watch?v=${data1.results[0].key}`);
-//         movieData[index]["trailer_link"] = `https://www.youtube.com/watch?v=${data1.results[0].key}`;
-//         console.log( movieData[index].trailer_link);
-//     })
-// }
+    // use that ID to search for youTube trailer
+    let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`
+    //let api_moviedb_api_url = `https://movie-voter.herokuapp.com/trailer?imdbid=${imdb_id}`
+    fetch(api_moviedb_api_url)
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data1){
+        console.log(`https://www.youtube.com/watch?v=${data1.results[0].key}`);
+        movieData[index]["trailer_link"] = `https://www.youtube.com/watch?v=${data1.results[0].key}`;
+        console.log( movieData[index].trailer_link);
+    })
+}
+
 
 
 // Creating the movie card from the array given in the 
@@ -134,9 +135,12 @@ function createMovieCard(){
     const filmPlot = movieData[index].Plot;
     const filmYear = movieData[index].Released;
 
+    const totalCardContainer = document.createElement("div"); 
+    document.getElementById("card-container").appendChild(totalCardContainer);
+
     const flipCardContainer = document.createElement("div"); 
-      flipCardContainer.setAttribute("class", "card")
-    document.getElementById("card-container").appendChild(flipCardContainer);
+    flipCardContainer.setAttribute("class", "card")
+    totalCardContainer.appendChild(flipCardContainer);
     
     // Building the flip card and it's front and back
     const flipCard = document.createElement("div")
@@ -166,6 +170,17 @@ function createMovieCard(){
     cardYear.innerText = filmYear;
     flipCardFront.appendChild(cardYear);
 
+
+    // Adding the button to the totalCardContainer
+    const cardTrailer = document.createElement("a");
+    cardTrailer.setAttribute("class", "btn btn-success");
+    cardTrailer.setAttribute("id", index)
+    cardTrailer.setAttribute("type", "submit")
+    cardTrailer.onclick = edit_button;
+    cardTrailer.innerText = "Trailer";
+    totalCardContainer.appendChild(cardTrailer);
+
+
     
     const flipCardBack = document.createElement("div")
     flipCardBack.setAttribute("class", "card_back outline ")
@@ -187,14 +202,6 @@ function createMovieCard(){
     //   cardActors.setAttribute("id", "exampleModalLabel")
     //   cardActors.innerText = "filmActors";
     //   modeHeader.appendChild(cardActors);
-
-    const cardTrailer = document.createElement("a");
-    cardTrailer.setAttribute("class", "btn btn-success");
-    cardTrailer.setAttribute("id", index)
-    cardTrailer.setAttribute("type", "submit")
-    cardTrailer.onclick = edit_button;
-    cardTrailer.innerText = "Trailer";
-    infoContainer.appendChild(cardTrailer);
 
     drawBarChart({
         dataArr: getRating(),
