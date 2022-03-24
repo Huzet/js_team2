@@ -38,10 +38,7 @@ nav {
     background-color: gray;
 }
 
-#card-container {
-    display:flex;
-    justify-content: space-evenly;
-}
+
 
 .movie-image{
     display: flex;
@@ -70,12 +67,6 @@ nav {
     text-align: center;
 }
 
-#movieCardModal {
-    justify-self: center;
-    width: 60%;
-    margin-top: 8px;  
-}
-
 .flexbox {
     height: 500px;
     width: 500px;
@@ -83,4 +74,90 @@ nav {
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+:root {
+  --primary: #2A9D8F;
+  --secondary: #E76F51;
+  --dark: #264653;
+  --light: #E9C46A;
+}
+#card-container {
+  width: 110%;
+  height: fit-content;
+  display:flex;
+  justify-content: space-evenly;
+  flex-direction:row;
+  flex-wrap: wrap;
+}
+.posterSize {
+  width: 200px;
+  height: 280px;
+  margin-top: 10px ;
+  justify-self: center;
+  align-self: baseline;
+}
+.spread {
+  width: 100%;
+}
+.card {
+  margin: 8px;
+  width: 310px;
+  height: 400px;
+  perspective: 1000px;
+  display:flex; 
+  align-content: center;
+  position: relative;
+}
+.card:hover .card_inner {
+  
+  transform: rotateY(-180deg);
+}
+.card_inner {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  transition: 3.0s ease;
+}
+
+
+.card_front {
+  display: grid;
+  align-items: center;
+  justify-content:center;
+ position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: visible;
+  border-radius: 16px;
+  background-image: linear-gradient(to bottom right, var(--primary), var(--dark));
+  flex-wrap: wrap; 
+}
+.card_front h2 {
+  color: #FFF;
+  font-size: 24px;
+  margin-top: 16px;
+  justify-items: center;
+}
+.card_back {
+ position: relative;
+ width: 100%;
+ height: 100%;
+ perspective: 1000px;
+ background-image: linear-gradient(to bottom left, var(--primary), var(--dark));
+ border-radius: 16px;
+ align-self: center;
+ backface-visibility: visible;
+ 
+}
+
+
+#movieYear {
+  color: #FFF;
+  font-size: 18px;
+  margin-top: 5px;
+  justify-content: center;
+
 }
