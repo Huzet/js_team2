@@ -317,13 +317,13 @@ function like_button_press(evt){
     let allCookies = document.cookie.split("=")
 
     if(allCookies[0] == 'voted'){
-        evt.target.parentElement.children[3].innerText = "You already voted";
+        evt.target.parentElement.children[4].innerText = "You already voted";
     }
     else{
         votes++;
         evt.target.children[0].innerText = votes;
         document.cookie = "voted=yes; SameSite=None; Secure; max-age=8";
-        evt.target.parentElement.children[3].innerText = "Vote Accepted";
+        evt.target.parentElement.children[4].innerText = "Vote Accepted";
     }
 }
 
