@@ -35,9 +35,16 @@ function getMovieData({movie_title_input, movie_release_year}) {
         return response.json();
     })
     .then(function(data){
-        movieData.push(data);
-        getMovieTrailer();
-        createMovieCard();
+        if (data.Response == "False"){
+            console.log("I dont have that movie displaying banner")
+            document.getElementById("movie_not_found_alert").innerText = "Movie not found please try again"
+        }
+        else{
+            document.getElementById("movie_not_found_alert").innerText = ""
+            movieData.push(data);
+            getMovieTrailer();
+            createMovieCard();       
+        }
     })
 }
 
