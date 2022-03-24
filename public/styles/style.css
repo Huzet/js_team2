@@ -1,27 +1,27 @@
 header {
-    height: 10rem;
-    padding-left: 10rem;
-    background-color: orange;
+  height: 10rem;
+  padding-left: 10rem;
+  background-color: orange;
 }
 
 header h1 {
-    padding-top: 2rem;
+  padding-top: 2rem;
 }
 
 header h2 {
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 header h6 {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 nav label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 nav {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
 }
 
 footer {
@@ -32,75 +32,74 @@ footer {
 }
 
 .outline {
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
-.movie-image{
-    display: flex;
-    justify-content: center;
-    margin: 8px;
+.movie-image {
+  display: flex;
+  justify-content: center;
+  margin: 8px;
 }
 
-#containerSection{
-    background-color: gray;
+#containerSection {
+  background-color: gray;
 }
 
-.movie-image{
-    display: flex;
-    justify-content: center;
-    margin: 8px;
-    margin-top: 15px;
+.movie-image {
+  display: flex;
+  justify-content: center;
+  margin: 8px;
+  margin-top: 15px;
 }
 
-#movieInfoContainer{
-   display: grid; 
-    
+#movieInfoContainer {
+  display: grid;
 }
 
 #movieCardTitle {
-    text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 #movieYear {
-    justify-self:center;
-    margin-top: 3px;  
+  justify-self: center;
+  margin-top: 3px;
 }
 
 .movieCardActors {
-    justify-self: center;
-    text-align: center;
+  justify-self: center;
+  text-align: center;
 }
 
 .flexbox {
-    height: 500px;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 :root {
-  --primary: #2A9D8F;
-  --secondary: #E76F51;
+  --primary: #2a9d8f;
+  --secondary: #e76f51;
   --dark: #264653;
-  --light: #E9C46A;
+  --light: #e9c46a;
 }
 
 #card-container {
   width: 110%;
   height: fit-content;
-  display:flex;
+  display: flex;
   justify-content: space-evenly;
-  flex-direction:row;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
 .posterSize {
   width: 200px;
   height: 280px;
-  margin-top: 10px ;
+  margin-top: 10px;
   justify-self: center;
   align-self: baseline;
 }
@@ -114,58 +113,66 @@ footer {
   width: 310px;
   height: 400px;
   perspective: 1000px;
-  display:flex; 
+  display: flex;
   align-content: center;
   position: relative;
 }
-
-.card:hover .card_inner { 
-  transform: rotateY(-180deg);
-}
-
 .card_inner {
   position: absolute;
   display: flex;
   width: 100%;
   height: 100%;
   perspective: 1000px;
-  transition: 1.0s ease;
+  transition: 2s ease;
+}
+.topCard {
+  z-index: 100;
+}
+.bottomCard {
+  z-index: 0;
 }
 
 .card_front {
   display: grid;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: visible;
   border-radius: 16px;
-  background-image: linear-gradient(to bottom right, var(--primary), var(--dark));
-  flex-wrap: wrap; 
+  background-image: linear-gradient(
+    to bottom right,
+    var(--primary),
+    var(--dark)
+  );
+  flex-wrap: wrap;
 }
 .card_front h2 {
-  color: #FFF;
+  color: #fff;
   font-size: 24px;
   margin-top: 16px;
   justify-items: center;
 }
 
 .card_back {
- position: absolute;
- width: 70%;
- height: 70%;
- perspective: 1000px;
- background-image: linear-gradient(to bottom left, var(--primary), var(--dark));
- border-radius: 16px;
- align-self: center;
- backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  background-image: linear-gradient(
+    to bottom left,
+    var(--primary),
+    var(--dark)
+  );
+  border-radius: 16px;
+  align-self: center;
+  backface-visibility: hidden;
 }
 
 #movieYear {
-  color: #FFF;
+  color: #fff;
   font-size: 18px;
   margin-top: 5px;
   justify-content: center;
-
 }
