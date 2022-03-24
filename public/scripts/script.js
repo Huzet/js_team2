@@ -201,9 +201,10 @@ function createMovieCard(){
     //   modeHeader.appendChild(cardActors);
 
     const cardTrailer = document.createElement("a");
-    cardTrailer.setAttribute("href", movieData[index].trailer_link);
-    cardTrailer.setAttribute("target", "_blank");
     cardTrailer.setAttribute("class", "btn btn-success");
+    cardTrailer.setAttribute("id", index)
+    cardTrailer.setAttribute("type", "submit")
+    cardTrailer.onclick = edit_button;
     cardTrailer.innerText = "Trailer";
     infoContainer.appendChild(cardTrailer);
 
@@ -321,3 +322,10 @@ function generateRandomColors({ howMany }) {
     }
     return randColors;
 }
+
+function edit_button(evt){
+    let index = parseInt(evt.target.id);
+    let movieTrailer =  movieData[index].trailer_link
+    console.log("Movie trailer: " + movieTrailer)
+    window.open(movieTrailer);
+        }
