@@ -154,6 +154,13 @@ function createMovieCard(){
     cardLikeButton.innerHTML = '<i class="bi bi-hand-thumbs-up-fill">0</i>';
     totalCardContainer.appendChild(cardLikeButton);
 
+    const cardLikeButton1 = document.createElement("a");
+    cardLikeButton1.setAttribute("class", "btn btn-danger");
+    cardLikeButton1.setAttribute("type", "submit")
+    cardLikeButton1.onclick = delete_button_press;
+    cardLikeButton1.innerHTML = 'Delete';
+    totalCardContainer.appendChild(cardLikeButton1);
+
     const cardLikeButtonSmall = document.createElement("p");
     cardLikeButtonSmall.innerHTML = "";
     totalCardContainer.appendChild(cardLikeButtonSmall);
@@ -341,4 +348,9 @@ function pasteToClipBoard(evt){
     navigator.clipboard.writeText(movie_titles)
     alert(movie_titles)
 
+}
+
+function delete_button_press(evt){
+    console.log("I work");
+    evt.target.parentElement.remove();
 }
