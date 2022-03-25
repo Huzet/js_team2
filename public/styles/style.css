@@ -181,6 +181,9 @@ footer {
   align-self: center;
   backface-visibility: hidden;
 }
+.card_back p {
+  font-size: 20px;
+}
 
 #movieYear {
   color: #fff;
@@ -190,26 +193,25 @@ footer {
 }
 
 /* Page colors */
-
-html{
+html {
   background-color: #264653;
 }
 
 nav {
-  background-image: linear-gradient(white, #E9C46A, #F4A261);
+  background-image: linear-gradient(white, #e9c46a, #f4a261);
 }
 #list_movies {
-  background-image: linear-gradient(#F4A261, white)
+  background-image: linear-gradient(#f4a261, white);
 }
-#graphs_holder_css{
-  background-image: linear-gradient(white, #F4A261, #264653);
-  background-color: #F4A261;
-}
-
-#card_holder{
-  background-color: #2A9D8F;
+#graphs_holder_css {
+  background-image: linear-gradient(white, #f4a261, #264653);
+  background-color: #f4a261;
 }
 
-#footer_conatiner{
+#card_holder {
+  background-color: #2a9d8f;
+}
+
+#footer_conatiner {
   background-color: #264653;
 }

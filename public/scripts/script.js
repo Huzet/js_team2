@@ -94,17 +94,18 @@ function getMovieTrailer() {
     });
 }
 
-// Creating the movie card from the array given in the
+// Creating the movie card from the array given from the API
 function createMovieCard() {
+  // creating variables for use in the function
   let index = movieData.length - 1;
   const filmPoster = movieData[index].Poster;
   const filmActors = movieData[index].Actors;
   const filmTitle = movieData[index].Title;
-  const filmRating = movieData[index].imdbRating;
   const filmGenre = movieData[index].Genre;
   const filmPlot = movieData[index].Plot;
   const filmYear = movieData[index].Released;
 
+  // Each time we create a card, we need to add it to the larger container holding all of our cards.
   const totalCardContainer = document.createElement("div");
   document.getElementById("card-container").appendChild(totalCardContainer);
 
@@ -113,19 +114,21 @@ function createMovieCard() {
   totalCardContainer.appendChild(flipCardContainer);
 
   // Building the flip card and it's front and back
-  const flipCard = document.createElement("div");
-  flipCard.setAttribute("class", "card_inner topCard");
-  flipCardContainer.appendChild(flipCard);
-  flipCard.addEventListener("click", flip);
+  // Adding Event Listeners to both the front and back
+  const flipFront = document.createElement("div");
+  flipFront.setAttribute("class", "card_inner topCard");
+  flipCardContainer.appendChild(flipFront);
+  flipFront.addEventListener("click", flip);
 
   const flipBack = document.createElement("div");
   flipBack.setAttribute("class", "card_inner bottomCard");
   flipCardContainer.appendChild(flipBack);
   flipBack.addEventListener("click", flip);
 
+  // Adding the front card then putting the poster, title, and year on it.
   const flipCardFront = document.createElement("div");
   flipCardFront.setAttribute("class", "card_front");
-  flipCard.appendChild(flipCardFront);
+  flipFront.appendChild(flipCardFront);
 
   const cardPoster = document.createElement("img");
   cardPoster.setAttribute("class", "posterSize");
@@ -142,55 +145,71 @@ function createMovieCard() {
   cardYear.innerText = filmYear;
   flipCardFront.appendChild(cardYear);
 
+  // Adding the back card then putting the actors, plot, and genre on the back.
   const flipCardBack = document.createElement("div");
   flipCardBack.setAttribute("class", "card_back");
   flipBack.appendChild(flipCardBack);
 
-  // Adding the button to the totalCardContainer
+  const cardActors = document.createElement("h3");
+  cardActors.style.fontSize = "24px";
+  cardActors.style.margin = "7px";
+  cardActors.style.marginTop = "10%";
+  cardActors.style.marginBottom = "10%";
+  cardActors.style.color = "white";
+  cardActors.style.fontWeight = "bold";
+  cardActors.style.textAlign = "center";
+  cardActors.innerText = filmActors;
+  flipCardBack.appendChild(cardActors);
+
+  const flipCardBackPara = document.createElement("p");
+  flipCardBackPara.style.fontSize = "20px";
+  flipCardBackPara.style.margin = "7px";
+  flipCardBackPara.style.marginTop = "10%";
+  flipCardBackPara.style.color = "#e9c46a";
+  flipCardBackPara.style.fontStyle = "italic";
+  flipCardBackPara.style.textAlign = "center";
+  flipCardBackPara.innerText = filmPlot;
+  flipCardBack.appendChild(flipCardBackPara);
+
+  const flipCardBackGenre = document.createElement("p");
+  flipCardBackGenre.style.fontSize = "15px";
+  flipCardBackGenre.style.margin = "7px";
+  flipCardBackGenre.style.marginTop = "5%";
+  flipCardBackGenre.style.marginBottom = "10%";
+  flipCardBackGenre.style.color = "white";
+  flipCardBackGenre.style.textAlign = "center";
+  flipCardBackGenre.innerText = filmGenre;
+  flipCardBack.appendChild(flipCardBackGenre);
+
+  //Adding buttons to the bottom of each card
   const cardTrailer = document.createElement("a");
-  cardTrailer.setAttribute("class", "btn btn-success");
+  cardTrailer.setAttribute("class", "btn btn-primary");
   cardTrailer.setAttribute("id", index);
   cardTrailer.setAttribute("type", "submit");
+  cardTrailer.style.width = "33%";
   cardTrailer.onclick = button_action_trailer;
   cardTrailer.innerText = "Trailer";
   totalCardContainer.appendChild(cardTrailer);
 
-  // ADD TO NEW BRANCH
   const cardLikeButton = document.createElement("a");
   cardLikeButton.setAttribute("class", "btn btn-success");
   cardLikeButton.setAttribute("type", "submit");
   cardLikeButton.onclick = like_button_press;
   cardLikeButton.innerHTML = '<i class="bi bi-hand-thumbs-up-fill">0</i>';
+  cardLikeButton.style.width = "33%";
   totalCardContainer.appendChild(cardLikeButton);
 
-  const cardLikeButton1 = document.createElement("a");
-  cardLikeButton1.setAttribute("class", "btn btn-danger");
-  cardLikeButton1.setAttribute("type", "submit");
-  cardLikeButton1.onclick = delete_button_press;
-  cardLikeButton1.innerHTML = "Delete";
-  totalCardContainer.appendChild(cardLikeButton1);
+  const cardDeleteButton = document.createElement("a");
+  cardDeleteButton.setAttribute("class", "btn btn-danger");
+  cardDeleteButton.setAttribute("type", "submit");
+  cardDeleteButton.onclick = delete_button_press;
+  cardDeleteButton.innerHTML = "Delete";
+  cardDeleteButton.style.width = "33%";
+  totalCardContainer.appendChild(cardDeleteButton);
 
   const cardLikeButtonSmall = document.createElement("p");
   cardLikeButtonSmall.innerHTML = "";
   totalCardContainer.appendChild(cardLikeButtonSmall);
-  //
-
-  const flipCardBackPara = document.createElement("p");
-  flipCardBackPara.style.fontSize = "10px";
-  flipCardBackPara.innerText = filmPlot;
-  flipCardBack.appendChild(flipCardBackPara);
-  // const flipCardBackContent = document.createElement("div");
-  // flipCardBackContent.setAttribute("class", "card_content");
-  // flipCardBack.appendChild(flipCardBackContent);
-
-  // const flipCardBackBody = document.createElement("div ");
-  // flipCardBackBody.setAttribute("class", "card_body")
-
-  //   const cardActors = document.createElement("h5");
-  //   cardActors.setAttribute("class", "modal-title");
-  //   cardActors.setAttribute("id", "exampleModalLabel")
-  //   cardActors.innerText = "filmActors";
-  //   modeHeader.appendChild(cardActors);
 
   drawBarChart({
     dataArr: getBoxOffice(),
@@ -209,6 +228,31 @@ function createMovieCard() {
       howMany: movieData.length,
     }),
   });
+}
+
+// Going to swap classes from top to bottom and vice versa
+function toggleClasses(elt) {
+  if (elt.classList.contains("topCard")) {
+    elt.classList.replace("topCard", "bottomCard");
+  } else {
+    elt.classList.replace("bottomCard", "topCard");
+  }
+}
+
+// This function flips when the card is clicked.
+function flip(e) {
+  const elt = e.currentTarget;
+  const eltNextSibling = elt.nextSibling;
+  const eltPreviousSibling = elt.previousSibling;
+
+  elt.style.transform = "rotateY(-360deg)";
+  toggleClasses(elt);
+
+  if (eltNextSibling !== null) {
+    toggleClasses(eltNextSibling);
+  } else {
+    toggleClasses(eltPreviousSibling);
+  }
 }
 
 function getTitle() {
