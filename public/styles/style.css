@@ -206,6 +206,7 @@ nav {
 #graphs_holder_css {
   background-image: linear-gradient(white, #f4a261, #264653);
   background-color: #f4a261;
+  width: 100%;
 }
 
 #card_holder {
