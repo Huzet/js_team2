@@ -193,7 +193,7 @@ function createMovieCard() {
   //   modeHeader.appendChild(cardActors);
 
   drawBarChart({
-    dataArr: getRating(),
+    dataArr: getBoxOffice(),
     labelsArr: getTitle(),
     bgColorsArr: generateRandomColors({
       howMany: movieData.length,
@@ -203,43 +203,12 @@ function createMovieCard() {
     }),
   });
   drawDoughnutChart({
-    dataArr: getBoxOffice(),
+    dataArr: getRating(),
     labelsArr: getTitle(),
     bgColorsArr: generateRandomColors({
       howMany: movieData.length,
     }),
   });
-}
-
-function toggleClasses(elt) {
-  // Going to swap classes from top to bottom and vice versa
-  if (elt.classList.contains("topCard")) {
-    elt.classList.replace("topCard", "bottomCard");
-  } else {
-    elt.classList.replace("bottomCard", "topCard");
-  }
-}
-
-function flip(e) {
-  // transform: rotateY(-180deg);
-  const elt = e.currentTarget;
-  //   const parentElt = e.target.parentElement;
-  const eltNextSibling = elt.nextSibling;
-  const eltPreviousSibling = elt.previousSibling;
-
-  elt.style.transform = "rotateY(-360deg)";
-  //   if (eltNextSibling !== null) {
-  //     eltNextSibling.style.transform = "rotateY(-180deg)";
-  //   } else {
-  //     eltPreviousSibling.style.transform = "rotateY(-180deg)";
-  //   }
-  toggleClasses(elt);
-
-  if (eltNextSibling !== null) {
-    toggleClasses(eltNextSibling);
-  } else {
-    toggleClasses(eltPreviousSibling);
-  }
 }
 
 function getTitle() {
@@ -333,6 +302,37 @@ function generateRandomColors({ howMany }) {
     randColors.push(color);
   }
   return randColors;
+}
+
+function toggleClasses(elt) {
+  // Going to swap classes from top to bottom and vice versa
+  if (elt.classList.contains("topCard")) {
+    elt.classList.replace("topCard", "bottomCard");
+  } else {
+    elt.classList.replace("bottomCard", "topCard");
+  }
+}
+
+function flip(e) {
+  // transform: rotateY(-180deg);
+  const elt = e.currentTarget;
+  //   const parentElt = e.target.parentElement;
+  const eltNextSibling = elt.nextSibling;
+  const eltPreviousSibling = elt.previousSibling;
+
+  elt.style.transform = "rotateY(-360deg)";
+  //   if (eltNextSibling !== null) {
+  //     eltNextSibling.style.transform = "rotateY(-180deg)";
+  //   } else {
+  //     eltPreviousSibling.style.transform = "rotateY(-180deg)";
+  //   }
+  toggleClasses(elt);
+
+  if (eltNextSibling !== null) {
+    toggleClasses(eltNextSibling);
+  } else {
+    toggleClasses(eltPreviousSibling);
+  }
 }
 
 function button_action_trailer(evt) {
