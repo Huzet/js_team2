@@ -79,8 +79,8 @@ function getMovieTrailer() {
   let imdb_id = movieData[index].imdbID;
 
   // use that ID to search for youTube trailer
-  let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`;
-  //let api_moviedb_api_url = `https://movie-voter.herokuapp.com/trailer?imdbid=${imdb_id}`
+  // let api_moviedb_api_url = `http://localhost:3000/trailer?imdbid=${imdb_id}`;
+  let api_moviedb_api_url = `https://movie-voter.herokuapp.com/trailer?imdbid=${imdb_id}`
   fetch(api_moviedb_api_url)
     .then(function (response) {
       return response.json();
