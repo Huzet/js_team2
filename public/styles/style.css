@@ -71,13 +71,25 @@ footer {
   text-align: center;
 }
 
-.flexbox {
-  height: 500px;
-  width: 500px;
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-content: stretch;
+}
+
+.row > .element {
+  flex-basis: 30%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0; /* without this it breaks even more*/
+}
+.chart {
+  border: 1px solid white;
 }
 
 :root {
